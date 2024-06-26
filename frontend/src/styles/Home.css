@@ -1,5 +1,10 @@
+.header {
+    color: rgb(2, 34, 56);
+    font-size: calc(15px + 2vmin);
+}
+
 body {
-    background-color: gray;
+    background-color: rgb(193, 211, 223);
     min-height: 100vh;
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
@@ -8,6 +13,7 @@ body {
 }
 
 .habit-list {
+    padding-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -34,11 +40,13 @@ body {
 }
 
 .habit-form-row {
-    background-color: rgb(250, 244, 220);
     box-shadow: black 10px 10px 10px;
     width: 100%;
     padding: 1vh;
-    margin-top: 1vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     background: repeating-linear-gradient(
         0deg,
         #ffffff 0px, #ffffff 43px,

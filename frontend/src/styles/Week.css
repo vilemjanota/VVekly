@@ -5,6 +5,7 @@
 }
 
 .day {
+    min-width: 270px;
     text-align: center;
     flex-grow: 1;
     display: flex;
