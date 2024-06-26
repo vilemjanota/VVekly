@@ -3,6 +3,7 @@ import api from '../api'
 import Habit from '../components/Habit'
 import Week from '../components/Week'
 import '../styles/Home.css'
+import { Link } from 'react-router-dom'
 
 function Home() {
     const [habits, setHabits] = useState([])
@@ -53,6 +54,7 @@ function Home() {
 
     return (
         <body>
+            <Link className='logout' to="/logout">Logout</Link>
             <div className='header'><h1>VVeekly</h1></div>
             <div className='week-row'><Week habits={habits} deleteHabit={deleteHabit} /></div>
             <div className='habit-form-row'>

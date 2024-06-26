@@ -1,3 +1,11 @@
+.logout {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
 .header {
     color: rgb(2, 34, 56);
     font-size: calc(15px + 2vmin);
@@ -47,11 +55,7 @@ body {
     padding-bottom: 2vh;
     margin-top: 2vh;
     margin-bottom: 2vh;
-    background: repeating-linear-gradient(
-        0deg,
-        #ffffff 0px, #ffffff 43px,
-        #c9c2c2 43px, #c9c2c2 44px
-    );
+    background-color: white;
 }
 
 .submit-button {
