@@ -1,0 +1,31 @@
+.habit-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 300px;
+
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(136, 155, 133);
+    box-shadow: black 10px 10px 10px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 5vh;
+    padding: 15px 32px;
+    font-size: calc(10px + 2vmin);
+    cursor: pointer;
+}
+
+.habit-text {
+    padding-left: 10px;
+
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    font-size: large;
+    border-radius: 4px;
+    cursor: pointer;
+}
