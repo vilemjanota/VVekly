@@ -14,6 +14,7 @@ function Home() {
     const [saturday, setSaturday] = useState(false)
     const [sunday, setSunday] = useState(false)
     const [title, setTitle] = useState('')
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         getHabits()
@@ -52,6 +53,7 @@ function Home() {
 
     return (
         <body>
+            <div className='header'><h1>VVeekly</h1></div>
             <div className='week-row'><Week habits={habits} deleteHabit={deleteHabit} /></div>
             <div className='habit-form-row'>
                 <h1>Add Habit:</h1>
@@ -87,10 +89,11 @@ function Home() {
             </div>
             <div className='habit-list-row'>
                 <h1>Find Habits:</h1>
+                <input type='text' id='search' name='search' value={search} onChange={event => setSearch(event.target.value)} placeholder='Search habits...' />
                 <div className='habit-list'>
-                    {habits.map(habit => (
-                        <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
-                    ))}
+                {habits.filter(habit => habit.title.toLowerCase().includes(search.toLowerCase())).map(habit => (
+                    <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
+                ))}
                 </div>
             </div>
         </body>
