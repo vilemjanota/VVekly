@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
-import api from "../api"
-import Habit from "../components/Habit"
+import { useState, useEffect } from 'react'
+import api from '../api'
+import Habit from '../components/Habit'
+import Week from '../components/Week'
 import '../styles/Home.css'
 
 function Home() {
@@ -53,13 +54,13 @@ function Home() {
         <div>
             <div>
                 <h1>Habits</h1>
-                <div className="habit-list">
+                <div className='habit-list'>
                     {habits.map(habit => (
                         <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
                     ))}
                 </div>
             </div>
-            <form onSubmit={addHabit}>
+            <form className='habit-form' onSubmit={addHabit}>
                 <label htmlFor='title'>Title:</label>
                 <br />
                 <input type='text' id='title' name='title' value={title} required onChange={event => setTitle(event.target.value)} />
@@ -87,6 +88,7 @@ function Home() {
                 <br />
                 <input type='submit' value='Submit'></input>
             </form>
+            <div><Week habits={habits} deleteHabit={deleteHabit} /></div>
         </div>
     );
 }
