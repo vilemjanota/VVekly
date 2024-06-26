@@ -15,5 +15,5 @@ class UserSerializer(serializers.ModelSerializer):
 class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
-        fields = ['id', 'title', 'description', 'created_at', 'user']
+        fields = ['user', 'id', 'title', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         extra_kwargs = {'user': {'read_only': True}}

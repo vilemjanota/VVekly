@@ -3,23 +3,27 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    max-width: 300px;
+    max-width: 200px;
 
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgb(136, 155, 133);
+    background-color: rgb(71, 133, 148);
     box-shadow: black 10px 10px 10px;
     color: white;
     border: none;
     border-radius: 12px;
-    margin-bottom: 5vh;
-    padding: 15px 32px;
-    font-size: calc(10px + 2vmin);
+    margin-bottom: 1vh;
+    margin-right: 1vh;
+    padding: 5px 10px;
+    font-size: calc(8px + 1vmin);
     cursor: pointer;
 }
+.habit-days {
+    display: flex;
+    flex-direction: row;
+}
 
-.habit-text {
-    padding-left: 10px;
-
+.habit-days p {
+    margin-right: 5px;
 }
 
 .delete-button {
