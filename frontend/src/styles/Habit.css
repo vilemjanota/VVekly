@@ -4,8 +4,6 @@
     align-items: center;
     justify-content: space-between;
     max-width: 200px;
-
-    font-family: 'Courier New', Courier, monospace;
     background-color: rgb(71, 133, 148);
     box-shadow: black 10px 10px 10px;
     color: white;
@@ -15,17 +13,14 @@
     margin-right: 1vh;
     padding: 5px 10px;
     font-size: calc(8px + 1vmin);
-    cursor: pointer;
 }
 .habit-days {
     display: flex;
     flex-direction: row;
 }
-
 .habit-days p {
     margin-right: 5px;
 }
-
 .delete-button {
     background: none;
     border: none;

@@ -9,17 +9,20 @@ function Week({ habits, deleteHabit }) {
     }
 
     return (
-        <div className='week'>
-            {days.map((day, index) => (
-                // Return a div for each day.
-                <div className='day' key={index}>
-                    {formatDay(day)}
-                    {/* Filter out habits where day is true */}
-                    {habits.filter(habit => habit[day]).map(habit => (
-                        <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
-                    ))}
-                </div>
-            ))}
+        <div>
+            <h1>Your Week:</h1>
+            <div className='week'>
+                {days.map((day, index) => (
+                    // Return a div for each day.
+                    <div className='day' key={index}>
+                        {formatDay(day)}
+                        {/* Filter out habits where day is true */}
+                        {habits.filter(habit => habit[day]).map(habit => (
+                            <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
+                        ))}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

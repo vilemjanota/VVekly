@@ -51,45 +51,49 @@ function Home() {
     }
 
     return (
-        <div>
-            <div>
-                <h1>Habits</h1>
+        <body>
+            <div className='week-row'><Week habits={habits} deleteHabit={deleteHabit} /></div>
+            <div className='habit-form-row'>
+                <h1>Add Habit:</h1>
+                <form className='habit-form' onSubmit={addHabit}>
+                    <div className='habit-form-title'>
+                        <label htmlFor='title'>Title:</label>
+                        <input type='text' id='title' name='title' value={title} required onChange={event => setTitle(event.target.value)} />
+                    </div>
+                    <div className='habit-form-days'>
+                        <input type='checkbox' id='monday' name='monday' checked={monday} onChange={() => setMonday(monday => !monday)} />
+                        <label htmlFor='monday'>Monday</label>
+                        <br />
+                        <input type='checkbox' id='tuesday' name='tuesday' checked={tuesday} onChange={() => setTuesday(tuesday => !tuesday)} />
+                        <label htmlFor='tuesday'>Tuesday</label>
+                        <br />
+                        <input type='checkbox' id='wednesday' name='wednesday' checked={wednesday} onChange={() => setWednesday(wednesday => !wednesday)} />
+                        <label htmlFor='wednesday'>Wednesday</label>
+                        <br />
+                        <input type='checkbox' id='thursday' name='thursday' checked={thursday} onChange={() => setThursday(thursday => !thursday)} />
+                        <label htmlFor='thursday'>Thursday</label>
+                        <br />
+                        <input type='checkbox' id='friday' name='friday' checked={friday} onChange={() => setFriday(friday => !friday)} />
+                        <label htmlFor='friday'>Friday</label>
+                        <br />
+                        <input type='checkbox' id='saturday' name='saturday' checked={saturday} onChange={() => setSaturday(saturday => !saturday)} />
+                        <label htmlFor='saturday'>Saturday</label>
+                        <br />
+                        <input type='checkbox' id='sunday' name='sunday' checked={sunday} onChange={() => setSunday(sunday => !sunday)} />
+                        <label htmlFor='sunday'>Sunday</label>
+                    </div>
+                    <input className='submit-button' type='submit' value='Submit'></input>
+                </form>
+            </div>
+            <div className='habit-list-row'>
+                <h1>Find Habits:</h1>
                 <div className='habit-list'>
                     {habits.map(habit => (
                         <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
                     ))}
                 </div>
             </div>
-            <form className='habit-form' onSubmit={addHabit}>
-                <label htmlFor='title'>Title:</label>
-                <br />
-                <input type='text' id='title' name='title' value={title} required onChange={event => setTitle(event.target.value)} />
-                <br />
-                <input type='checkbox' id='monday' name='monday' checked={monday} onChange={() => setMonday(monday => !monday)} />
-                <label htmlFor='monday'>Monday</label>
-                <br />
-                <input type='checkbox' id='tuesday' name='tuesday' checked={tuesday} onChange={() => setTuesday(tuesday => !tuesday)} />
-                <label htmlFor='tuesday'>Tuesday</label>
-                <br />
-                <input type='checkbox' id='wednesday' name='wednesday' checked={wednesday} onChange={() => setWednesday(wednesday => !wednesday)} />
-                <label htmlFor='wednesday'>Wednesday</label>
-                <br />
-                <input type='checkbox' id='thursday' name='thursday' checked={thursday} onChange={() => setThursday(thursday => !thursday)} />
-                <label htmlFor='thursday'>Thursday</label>
-                <br />
-                <input type='checkbox' id='friday' name='friday' checked={friday} onChange={() => setFriday(friday => !friday)} />
-                <label htmlFor='friday'>Friday</label>
-                <br />
-                <input type='checkbox' id='saturday' name='saturday' checked={saturday} onChange={() => setSaturday(saturday => !saturday)} />
-                <label htmlFor='saturday'>Saturday</label>
-                <br />
-                <input type='checkbox' id='sunday' name='sunday' checked={sunday} onChange={() => setSunday(sunday => !sunday)} />
-                <label htmlFor='sunday'>Sunday</label>
-                <br />
-                <input type='submit' value='Submit'></input>
-            </form>
-            <div><Week habits={habits} deleteHabit={deleteHabit} /></div>
-        </div>
+        </body>
     );
 }
 
