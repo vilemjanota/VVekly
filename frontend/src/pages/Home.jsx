@@ -96,7 +96,7 @@ function Home() {
     }
 
     const checkUserStatus = () => {
-        const userToken = localStorage.getItem('ACCESS_TOKEN')
+        const userToken = localStorage.getItem('access')
         const guestSessionId = sessionStorage.getItem('session_id')
     
         if (userToken) {
