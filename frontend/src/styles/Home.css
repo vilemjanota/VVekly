@@ -1,9 +1,8 @@
-.logout {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+.login-out {
+    max-width: fit-content;
     margin-right: 20px;
     margin-top: 20px;
+    float: right;
 }
 
 .header {
@@ -16,7 +15,9 @@ body {
     min-height: 100vh;
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
-    padding: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
     text-align: center;
 }
 

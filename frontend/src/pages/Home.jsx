@@ -6,6 +6,7 @@ import '../styles/Home.css'
 import { Link } from 'react-router-dom'
 
 function Home() {
+    const [userStatus, setUserStatus] = useState(null);
     const [habits, setHabits] = useState([])
     const [monday, setMonday] = useState(false)
     const [tuesday, setTuesday] = useState(false)
@@ -18,15 +19,52 @@ function Home() {
     const [search, setSearch] = useState('')
 
     useEffect(() => {
-        getHabits()
+        const status = checkUserStatus();
+        setUserStatus(status);
     }, [])
+
+    useEffect(() => {
+        // This effect now depends on userStatus, ensuring it runs after userStatus is set
+        if (userStatus) {
+            userStatus === "guest" ? getGuestHabits() : getHabits();
+        }
+    }, [userStatus]); // Dependency array includes userStatus
+
+
+    const getGuestHabits = () => {
+        const guestHabits = JSON.parse(sessionStorage.getItem('guestHabits')) || [];
+        setHabits(guestHabits);
+    }
 
     const getHabits = () => {
         api
             .get('/api/habits/')
             .then(response => response.data)
-            .then(data => { setHabits(data), console.log(data) })
+            .then(data => { setHabits(data) })
             .catch(error => alert(error))
+    }
+
+    const addGuestHabit = (event) => {
+        event.preventDefault();
+        //Retrieve existing habits from sessionStorage
+        const existingHabits = JSON.parse(sessionStorage.getItem('guestHabits')) || [];
+        //Create a new habit object
+        const newHabit = {
+            title,
+            monday,
+            tuesday,
+            wednesday,
+            thursday,
+            friday,
+            saturday,
+            sunday,
+            id: existingHabits.length + 1,
+        };
+        //Update the habits array
+        const updatedHabits = [...existingHabits, newHabit];
+        //Store the updated array in sessionStorage
+        sessionStorage.setItem('guestHabits', JSON.stringify(updatedHabits));
+        getGuestHabits();
     }
 
     const addHabit = (event) => {
@@ -34,32 +72,59 @@ function Home() {
         api
             .post('/api/habits/', { title, monday, tuesday, wednesday, thursday, friday, saturday, sunday })
             .then((response) => {
-                if (response.status === 201) alert('Habit added successfully')
-                else alert('Failed to add habit')
+                if (response.status !== 201) alert('Failed to add habit')
                 getHabits()
             })
             .catch(error => alert(error))
+    }
+
+    const deleteGuestHabit = (id) => {
+        const existingHabits = JSON.parse(sessionStorage.getItem('guestHabits')) || [];
+        const updatedHabits = existingHabits.filter(habit => habit.id !== id);
+        sessionStorage.setItem('guestHabits', JSON.stringify(updatedHabits));
+        getGuestHabits();
     }
 
     const deleteHabit = (id) => {
         api
             .delete(`/api/habits/delete/${id}/`)
             .then((response) => {
-                if (response.status === 204) alert('Habit deleted successfully')
-                else alert('Failed to delete habit')
+                if (response.status !== 204) alert('Failed to delete habit')
                 getHabits()
             })
             .catch(error => alert(error))
     }
 
+    const checkUserStatus = () => {
+        const userToken = localStorage.getItem('ACCESS_TOKEN')
+        const guestSessionId = sessionStorage.getItem('session_id')
+    
+        if (userToken) {
+            return "loggedIn";
+        } else if (guestSessionId) {
+            return "guest";
+        } else {
+            api.get('/api/session/guest/')
+            .then(response => {
+                const sessionId = response.data.session_id;
+                sessionStorage.setItem('session_id', sessionId); // Store session ID
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('Failed to initialize guest session', error);
+            });
+            return "guest";
+        }
+    }
+
     return (
         <body>
-            <Link className='logout' to="/logout">Logout</Link>
+            <div className='login-out'>{userStatus === "guest" ? <Link to="/login">Login</Link> : <Link to="/logout">Logout</Link>}</div>
             <div className='header'><h1>VVeekly</h1></div>
-            <div className='week-row'><Week habits={habits} deleteHabit={deleteHabit} /></div>
+            <div className='week-row'><Week habits={habits} deleteHabit={userStatus === "guest" ? deleteGuestHabit : deleteHabit} /></div>
             <div className='habit-form-row'>
                 <h1>Add Habit:</h1>
-                <form className='habit-form' onSubmit={addHabit}>
+                <form className='habit-form' onSubmit={userStatus === "guest" ? addGuestHabit : addHabit}>
                     <div className='habit-form-title'>
                         <label htmlFor='title'>Title:</label>
                         <input type='text' id='title' name='title' value={title} required onChange={event => setTitle(event.target.value)} />
@@ -94,7 +159,7 @@ function Home() {
                 <input type='text' id='search' name='search' value={search} onChange={event => setSearch(event.target.value)} placeholder='Search habits...' />
                 <div className='habit-list'>
                 {habits.filter(habit => habit.title.toLowerCase().includes(search.toLowerCase())).map(habit => (
-                    <Habit key={habit.id} habit={habit} onDelete={deleteHabit} />
+                    <Habit key={habit.id} habit={habit} onDelete={userStatus === "guest" ? deleteGuestHabit : deleteHabit} />
                 ))}
                 </div>
             </div>
