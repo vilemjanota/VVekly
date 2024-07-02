@@ -1,10 +1,10 @@
 # Habit Tracker
 
-This project is a full-stack application designed to help users track their weekly habits. It utilizes a Django REST framework backend and a React frontend with Vite for an efficient development experience.
+This project is a full-stack web application designed to help users track their weekly habits. It utilizes a Django REST framework backend and a React frontend with Vite for an efficient development experience.
 
 ## Description
 
-Habits Tracker allows users to create, update, and monitor their weekly habits. It features a modern, responsive UI and a secure, scalable backend. The project is structured into a `frontend` directory for the React application and a `backend` directory for the Django REST API.
+Habit Tracker allows users to create, update, and monitor their weekly habits. It features a modern, responsive UI and a secure, scalable backend. The project is structured into a `frontend` directory for the React application and a `backend` directory for the Django REST API.
 
 ## Deployment
 
