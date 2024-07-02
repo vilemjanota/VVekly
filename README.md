@@ -1,4 +1,4 @@
-# VVeekly Habits Tracker
+# Habit Tracker
 
 This project is a full-stack application designed to help users track their weekly habits. It utilizes a Django REST framework backend and a React frontend with Vite for an efficient development experience.
 
