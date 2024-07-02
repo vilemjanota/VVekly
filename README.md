@@ -4,7 +4,7 @@ This project is a full-stack application designed to help users track their week
 
 ## Description
 
-VVeekly Habits Tracker allows users to create, update, and monitor their weekly habits. It features a modern, responsive UI and a secure, scalable backend. The project is structured into a `frontend` directory for the React application and a `backend` directory for the Django REST API.
+Habits Tracker allows users to create, update, and monitor their weekly habits. It features a modern, responsive UI and a secure, scalable backend. The project is structured into a `frontend` directory for the React application and a `backend` directory for the Django REST API.
 
 ## Deployment
 
