@@ -1,3 +1,7 @@
+.week-row {
+    border-top: 1px solid black;
+}
+
 .week {
     display: flex;
     flex-direction: row;

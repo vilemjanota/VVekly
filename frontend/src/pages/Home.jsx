@@ -3,9 +3,12 @@ import api from '../api'
 import Habit from '../components/Habit'
 import Week from '../components/Week'
 import '../styles/Home.css'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'; // Ensure this is imported
+
 
 function Home() {
+    const navigate = useNavigate();
+
     const [userStatus, setUserStatus] = useState(null);
     const [habits, setHabits] = useState([])
     const [monday, setMonday] = useState(false)
@@ -118,9 +121,17 @@ function Home() {
     }
 
     return (
-        <body>
-            <div className='login-out'>{userStatus === "guest" ? <Link to="/login">Login</Link> : <Link to="/logout">Logout</Link>}</div>
-            <div className='header'><h1>VVeekly</h1></div>
+        <div className='home'>
+            <div className='top-row'>
+                <div className='header'>
+                    <h1>Track your habits!</h1>
+                </div>
+                <div>
+                    {userStatus === "guest" ? 
+                    <button className='login-out' onClick={() => navigate('/login')}>Login</button> : 
+                    <button className='login-out' onClick={() => navigate('/logout')}>Logout</button>}
+                </div>            
+            </div>
             <div className='week-row'><Week habits={habits} deleteHabit={userStatus === "guest" ? deleteGuestHabit : deleteHabit} /></div>
             <div className='habit-form-row'>
                 <h1>Add Habit:</h1>
@@ -163,7 +174,7 @@ function Home() {
                 ))}
                 </div>
             </div>
-        </body>
+        </div>
     );
 }
 
