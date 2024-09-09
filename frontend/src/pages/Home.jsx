@@ -39,12 +39,20 @@ function Home() {
         setHabits(guestHabits);
     }
 
-    const getHabits = () => {
-        api
-            .get('/api/habits/')
-            .then(response => response.data)
-            .then(data => { setHabits(data) })
-            .catch(error => alert(error))
+    const getHabits = (retryCount = 0) => {
+        api.get('/api/habits/')
+            .then(response => {
+                setHabits(response.data);
+                setError(null); // Clear any previous errors
+            })
+            .catch(error => {
+                console.error('Error fetching habits:', error);
+                if (retryCount < maxRetries) {
+                    setTimeout(() => fetchHabits(retryCount + 1), retryDelay);
+                } else {
+                    setError('Failed to fetch habits. Please try again later.');
+                }
+            });
     }
 
     const addGuestHabit = (event) => {
