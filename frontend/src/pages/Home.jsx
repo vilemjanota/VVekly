@@ -40,17 +40,16 @@ function Home() {
     }
 
     const getHabits = (retryCount = 0) => {
+        const maxRetries = 3;
+        const retryDelay = 1000;
         api.get('/api/habits/')
             .then(response => {
                 setHabits(response.data);
-                setError(null); // Clear any previous errors
             })
             .catch(error => {
                 console.error('Error fetching habits:', error);
                 if (retryCount < maxRetries) {
-                    setTimeout(() => fetchHabits(retryCount + 1), retryDelay);
-                } else {
-                    setError('Failed to fetch habits. Please try again later.');
+                    setTimeout(() => getHabits(retryCount + 1), retryDelay);
                 }
             });
     }

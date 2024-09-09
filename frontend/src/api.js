@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { ACCESS_TOKEN } from './constants'
 
-const apiUrl = '/choreo-apis/vveekly/backend/v1'
+const apiUrl = '/choreo-apis/vveekly/backend/v1.0'
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : apiUrl,
 })
+
+console.log('Axios baseURL:', api.defaults.baseURL);
 
 api.interceptors.request.use(
     (config) => {
